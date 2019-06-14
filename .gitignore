@@ -1,52 +1,60 @@
-# Prerequisites
-*.d
+#include <cs50.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
-
-# Linker output
-*.ilk
-*.map
-*.exp
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+//This is Caesar's Cipher It will rotate your string input by ammount of K postions where k = Key int you input 
+int main(int argc, string argv[])
+    
+{   
+    //if more than 2 command line argument return with error Usage: ./caesar Key  
+    if (argc != 2)
+    {
+        printf("Usage: ./caesar Key\n");
+        return 1;
+    }
+    //if key is less than 0 return with error Usage: ./caesar Key
+    else if (argv[1] < 0)
+    {
+        printf("Usage: ./caesar Key\n");
+        return 1;
+    }
+    else
+ {    
+        //if no errors get string from user 
+        string s = get_string("Plaintext: ");
+    
+        //turn argv[1] into an int called k 
+        int k = atoi(argv[1]); 
+        
+        //Ciphered text will be printed here
+        printf("Ciphertext: ");    
+        
+        //itterate over strlen of s    
+    for (int i = 0, n = strlen(s); i < n; i++)
+  {  
+    //s[i] + k) - 97) % 26) + 97; algorithm to rotate chars by k position/s for lower case
+    if (islower(s[i]))
+        {
+            printf("%c", (((s[i] + k) - 97) % 26) + 97);
+        }
+    
+    //s[i] + k) - 97) % 26) + 97; algorithm to rotate chars by k position/s for upper case
+    else if (isupper(s[i]))
+       {
+            printf("%c", (((s[i] + k) - 65) % 26) + 65);
+       }
+    else
+    {
+        //prints current value of s[i] 
+        printf("%c", s[i]);
+    }
+            
+  }     //prints new line 
+        printf("\n");
+        
+        return 0; 
+ }    
+    
+}
